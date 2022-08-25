@@ -1,0 +1,148 @@
+<!-- Table to display variants -->
+<div class="table-wrapper">
+  <table id="productVariantTable" class="table">
+    <form class="variantForm" id="variantForm">
+      <tr>
+        <th>
+          Product
+        </th>
+        <th>
+          Price
+        </th>
+        <th>
+          Inv.
+          {% assign date = 'now' | date: '%B %d, %Y' %}
+          {% assign offset = 15 | times: 24 | times: 60 | times: 60 %}
+
+          <div class="variantTooltip" id="variantTooltip" hidden="true"> ?
+            <span class="tooltiptext">Est. Delivery: {{ date | date: "%s" | plus: offset | date: "%Y-%m-%d" }}</span>
+          </div>
+        </th>
+        <th>
+          Qty.
+        </th>
+      </tr>
+
+      {% for variant in product.variants %}
+      <tr class="productVariantTableRow {% if variant.inventory_quantity < 1 %}outOfStockVariant outOfStock-Hidden{% endif %}">
+        <td>
+          <div class="product-form__selected-value text--strong variantTitle">{{- variant.title -}}</div>
+          <span class="product-meta__sku variantSku">SKU: {{ variant.sku }}</span><br>
+        </td>
+        <td>
+        <!-- Price -->
+          <div class="product-form__info-item" >
+            <div class="product-form__info-content" role="region" aria-live="polite">
+              {% if customer %}
+              <div class="price-list">
+                <span class="price">
+                  <span class="money orderFormPrices"> 
+                      {{variant.price | money_with_currency}}
+                  </span>
+                </span>
+              </div>
+              {% else %}
+                {{ settings.hiddenPrices }}
+              {% endif %}
+            </div>
+          </div>
+        </td>
+        <td>
+          <!-- Inventory levels with colouring -->
+          {%- if variant.inventory_quantity > 0-%}
+            <span class="product-form__inventory inventory inventory--high inventoryLevel">{{ variant.inventory_quantity }}</span>
+            {%- else -%}
+            <span class="product-form__inventory inventory inventory--low inventoryLevel">{{ variant.inventory_quantity }}</span>
+          {%- endif -%}
+        </td>
+        <td>
+          <!-- Quantity selector -->
+          <div class="product-form__info-item">
+            <div class="product-form__info-content">
+              <div class="quantity-selector quantity-selector--product">
+                <button type="button" class="quantity-selector__button quantitySelectorMinus">{% render 'icon', icon: 'minus' %}</button>
+                <input id="{{ variant.id }}" class="quantity-selector__value quantityInputSelector"{% if variant.inventory_quantity < 1 %}disabled{% endif %} inputmode="numeric" value="0" size="3">
+                <button type="button" class="quantity-selector__button quantitySelectorPlus">{% render 'icon', icon: 'plus' %}</button>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </form>
+  </table>
+</div>
+
+<script>
+  const quantityInputSelectors = document.getElementsByClassName('quantityInputSelector');
+  const quantitySelectorsMinus = document.getElementsByClassName('quantitySelectorMinus');
+  const quantitySelectorsPlus = document.getElementsByClassName('quantitySelectorPlus');
+  const oosBcs = document.getElementsByClassName('outOfStockVariant');
+  const outOfStockToggle = document.getElementById('outOfStockToggle');
+  const variantToolTip = document.getElementById('variantTooltip');
+
+  for(let i = 0; i < quantityInputSelectors.length; i++)
+  {
+    quantityInputSelectors[i].addEventListener('keyup', function()
+    { 
+      // can be replaced with server sided validation for inventory
+      if(isNaN(quantityInputSelectors[i].value) || quantityInputSelectors[i].value > 999 || quantityInputSelectors[i].value < 1)
+      {
+        quantityInputSelectors[i].value = 0;
+      }
+    });
+  }
+
+  for(let i = 0; i < quantitySelectorsMinus.length; i++)
+  {
+    quantitySelectorsMinus[i].addEventListener('click', function()
+    { 
+      if(quantityInputSelectors[i].value > 0)
+      {
+        quantityInputSelectors[i].value--;
+      }
+    });
+  }
+
+  for(let i = 0; i < quantitySelectorsMinus.length; i++)
+  {
+    quantitySelectorsPlus[i].addEventListener('click', function()
+    { 
+      if(quantityInputSelectors[i].value < 999)
+      {
+        quantityInputSelectors[i].value++;
+      }
+    });
+  }
+
+  outOfStockToggle.addEventListener('change', event =>
+  {
+    if(event.target.checked)
+    {
+      // Showing out of stock layout
+      variantToolTip.hidden = false;
+
+      for(let i = 0; i < oosBcs.length; i++)
+      {
+        oosBcs[i].classList.remove('outOfStock-Hidden');
+        oosBcs[i].querySelector('.quantityInputSelector').disabled = false;
+      }
+    }
+    else
+    {
+      // On Default layout (showing only the items in stock)
+      // so we wana tag the out of stock ones as disabled
+      variantToolTip.hidden = true;
+
+      for(let i = 0; i < oosBcs.length; i++)
+      {
+        oosBcs[i].classList.remove('outOfStock-Shown');
+        oosBcs[i].classList.add('outOfStock-Hidden');
+        
+        // Disable it so it cannot be submitted
+        oosBcs[i].querySelector('.quantityInputSelector').disabled = true;
+      }
+    }
+  });
+  
+</script>

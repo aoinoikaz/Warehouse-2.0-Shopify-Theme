@@ -1,0 +1,105 @@
+{% if customer %}
+  <button type="button"
+          id="variantAddToCartBtn-bottom"
+          name="addToCart" 
+          class="product-form__add-button button button--primary wholesale-add-to-cart-btn"
+          onclick="AjaxAddToCart(); return false;">Add</button>
+{% endif %}
+<script>
+  
+  function AjaxAddToCart()
+  {
+    const variantBtn = document.getElementById('variantAddToCartBtn-bottom');
+    const allQuantityInputs =  document.getElementsByClassName('quantityInputSelector');
+    const showOutOfStockItems = document.getElementById('toggle-out-of-stock').checked;
+    
+    const activeQuantityInputs = [];
+    let totalQuantityAddedToCart = 0;
+    
+    let multiFormData = 
+    {
+      items:
+      [
+      ]
+    };
+    
+    for(let i = 0; i < allQuantityInputs.length; i++)
+    {
+      if(!allQuantityInputs[i].disabled)
+      {
+        activeQuantityInputs.push(allQuantityInputs[i]);
+      }
+    }
+    
+    const activeQuantityLength = activeQuantityInputs.length;
+    
+    let foundItems = false;
+    
+    for(let i = 0; i < activeQuantityLength; i++)
+    {
+      if(activeQuantityInputs[i].value > 0)
+      {
+        let variantId = activeQuantityInputs[i].getAttribute('id');
+        let variantQuantity = activeQuantityInputs[i].value;
+        
+        multiFormData.items.push({id:variantId, quantity: variantQuantity});
+        
+        totalQuantityAddedToCart += parseInt(variantQuantity);
+        
+        foundItems = true;
+      }
+      else
+      {
+      	if(i == activeQuantityLength - 1 && !foundItems)
+        {
+          alert('No products selected!');
+          return;
+        }
+      }
+    }
+    
+    document.dispatchEvent(new CustomEvent('theme:loading:start'));
+    
+    fetch('/cart/add.js', 
+    {
+      body: JSON.stringify(multiFormData),
+      credentials: 'same-origin',
+      method: 'POST',
+      headers: 
+      {
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest' // This is needed as currently there is a bug in Shopify that assumes this header
+      }
+    }).then(function (response) 
+     {
+     	document.dispatchEvent(new CustomEvent('theme:loading:end'));
+
+        if (response.ok) 
+        {
+          variantBtn.dispatchEvent(new CustomEvent('product:added', 
+          {
+            bubbles: true,
+            detail:
+            {
+              quantity: totalQuantityAddedToCart
+            }
+          }));
+      } 
+      else if (response.status == 422)
+      {
+      	alert('Cannot purchase this item when it is sold out!');
+      }
+      else 
+      {
+        alert('Error - please reload the page to fix. If the problem persists, please contact administration!');
+      }
+    });
+    
+    
+    for(let i = 0; i < activeQuantityInputs.length; i++)
+    {
+    	activeQuantityInputs[i].value = 0;
+    }
+  }
+  
+</script>

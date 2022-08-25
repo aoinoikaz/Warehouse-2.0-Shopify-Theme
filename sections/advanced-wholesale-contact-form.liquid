@@ -1,0 +1,609 @@
+<!-- 
+Author: Devon Tomlin
+Custom Multi-Step Signup Form
+June 3, 2022
+-->
+
+<br>
+<div class="container container--medium">
+  <div class="layout__section">
+
+    <!-- Advanced Wholesale Form Begin -->
+    {%- form 'contact', class: 'form', id: 'adv-ws-form' -%}
+
+    {%- if form.posted_successfully? -%}
+    <!--<p class="alert alert--success">{{ 'contact.form.successfully_sent' | t }}</p>-->
+    <p class="alert alert--success">Thank you, we've received your application! We will send you an activation link once it's approved.</p>
+
+    {%- endif -%}
+    
+    <p class="alert alert--error" id="errorMessage" hidden="true"></p>
+    <p class="alert" id="logger" hidden="true"></p>
+
+
+    {%- if form.errors -%}
+    <div class="alert alert--error" id="contact-form-error">
+      <ul class="alert__error-list" role="list">
+        {%- for field in form.errors -%}
+        {%- if field == 'form' -%}
+        <li class="alert__error-item">{{ form.errors.messages[field] }}</li>
+        {%- else -%}
+        <li class="alert__error-item">{{ form.errors.translated_fields[field] | capitalize }} {{ form.errors.messages[field] }}</li>
+        {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </div>
+    {%- endif -%}
+	
+    
+    <div class="heading h1 text-center">Wholesale Signup</div>
+	
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+      
+      <div class="progress" id="progress"> </div>
+      
+      <div class="progress-bar-step progress-bar-step-active" data-title="Business"></div>
+      <div class="progress-bar-step" data-title="Personal"></div>
+      <div class="progress-bar-step" data-title="Uploads"></div>
+    
+    </div>
+    
+    
+    <!-- First step -->
+    <div class ="form-step form-step-active" id="firstStep">
+      
+      <div class="form__input-row">
+        <!-- Legal Name of company -->
+        <div class="form__input-wrapper form__input-wrapper--labelled">
+          <input id="advWsForm-companyName" type="text" class="form__field form__field--text step1-fields" maxlength="30" name="contact[companyName]" aria-label="Company Name" required>
+          <label for="advWsForm-companyName" class="form__floating-label">Company Name</label>
+        </div>
+        
+		<!-- Operating As (O/A) -->
+        <div class="form__input-wrapper form__input-wrapper--labelled">
+          <input id="advWsForm-operatingAs" type="text" class="form__field form__field--text step1-fields" maxlength="30" name="contact[operatingAs]" aria-label="Operating As" required>
+          <label for="advWsForm-operatingAs" class="form__floating-label">Operating As</label>
+        </div>
+      </div>
+      
+      <div class="form__input-row"> 
+      	<!-- Street Name -->
+        <div class="form__input-wrapper form__input-wrapper--labelled">
+          <input id="advWsForm-streetName" type="text" class="form__field form__field--text step1-fields" maxlength="30" name="contact[streetName]" aria-label="Street Name" required>
+          <label for="advWsForm-streetName" class="form__floating-label">Street Name</label>
+        </div>
+        
+        <!-- Street Number -->
+        <div class="form__input-wrapper form__input-wrapper--labelled">
+          <input id="advWsForm-streetNumber" type="text" class="form__field form__field--text step1-fields" maxlength="30" name="contact[streetNumber]" aria-label="Street Number" required>
+          <label for="advWsForm-streetNumber" class="form__floating-label">Street Number</label>
+        </div>
+        
+        <!-- Unit Number -->
+        <div class="form__input-wrapper form__input-wrapper--labelled">
+          <input id="advWsForm-unit" type="text" class="form__field form__field--text" maxlength="30" name="contact[unit]" aria-label="Unit">
+          <label for="advWsForm-unit" class="form__floating-label">Unit</label>
+        </div>
+      
+      </div>
+      
+      
+      <div class="form__input-row"> 
+        <!-- City -->
+        <div class="form__input-wrapper form__input-wrapper--labelled">
+          <input id="advWsForm-city" type="text" class="form__field form__field--text step1-fields" maxlength="30" name="contact[city]" aria-label="City" required>
+          <label for="advWsForm-city" class="form__floating-label">City</label>
+        </div>
+        
+        <!-- Province -->
+        <div class="form__input-wrapper form__input-wrapper--labelled">
+          <input id="advWsForm-province" type="text" class="form__field form__field--text step1-fields" maxlength="30" name="contact[province]" aria-label="Province" required>
+          <label for="advWsForm-province" class="form__floating-label">Province</label>
+        </div>
+        
+        <!-- Postal Code -->
+        <div class="form__input-wrapper form__input-wrapper--labelled">
+          <input id="advWsForm-postalCode" type="text" class="form__field form__field--text step1-fields" maxlength="30" name="contact[postalCode]" aria-label="Postal Code" required>
+          <label for="advWsForm-postalCode" class="form__floating-label">Postal Code</label>
+        </div>
+      </div>
+      
+      <div class="form__input-row">
+         <!-- Phone Number -->
+        <div class="form__input-wrapper form__input-wrapper--labelled">
+          <input id="advWsForm-phoneNumber" type="tel" class="form__field form__field--text step1-fields" pattern="[0-9\-]*" name="contact[phoneNumber]" aria-label="Phone Number" required>
+          <label for="advWsForm-phoneNumber" class="form__floating-label">Phone Number</label>
+        </div>
+        
+        <!-- Email -->
+        <div class="form__input-wrapper form__input-wrapper--labelled">
+          <input id="advWsForm-email" type="email" class="form__field form__field--text step1-fields" maxlength="30" name="contact[email]" aria-label="Email" required>
+          <label for="advWsForm-email" class="form__floating-label">Email</label>
+        </div>
+        
+        
+      </div>
+      
+      <div class="form__input-row"> 
+        <!-- Website URL -->
+        <div class="form__input-wrapper form__input-wrapper--labelled">
+          <input id="advWsForm-website" type="text" class="form__field form__field--tex step1-fields" maxlength="30" name="contact[website]" aria-label="Email" required>
+          <label for="advWsForm-website" class="form__floating-label">Website URL</label>
+        </div>
+        
+        <!-- CRA Number HST/GST (write all numbers separately if you have more than one) -->
+        <div class="form__input-wrapper form__input-wrapper--labelled">
+          <input id="advWsForm-craNumber" type="text" class="form__field form__field--text step1-fields" maxlength="20" name="contact[craNumber]" aria-label="CRA Number" required>
+          <label for="advWsForm-craNumber" class="form__floating-label">CRA Number</label>
+        </div>
+      </div>
+      
+      <div class="form__input-row"> 
+      <!-- Business Formation Type -->
+        <div class="form__input-wrapper form__input-wrapper--labelled">
+          <label for="business_formation">Business Formation</label><br>
+          <input type="radio" id="business-formation-sole" name="contact[businessFormation]" value="Sole Prop"  class="step1-fields" required ><label for="business-formation-sole"> Sole Prop</label><br>
+          <input type="radio" id="business-formation-corp" name="contact[businessFormation]" value="Corporation"  class="step1-fields" required><label for="business-formation-corp"> Corporation</label><br>
+          <input type="radio" id="business-formation-partner" name="contact[businessFormation]" value="Partnership" class="step1-fields" required><label for="business-formation-partner"> Partnership</label><br>
+        </div>
+      </div>
+     
+      <div class="form__input-row"> 
+         <!-- Registration number of business type -->
+        <div class="form__input-wrapper form__input-wrapper--labelled">
+          <input id="advWsForm-registrationNumber" type="text" class="form__field form__field--text step1-fields" maxlength="20" name="contact[registrationNumber]" aria-label="Registration Number" required>
+          <label for="advWsForm-registrationNumber" class="form__floating-label">Registration Number</label>
+        </div>
+      
+      </div>
+
+      <!-- Next btn -->
+      <button type="button" class="form__submit button button--primary button--min-width ml-auto adv-ws-btn-next" id="adv-ws-step1-btn-next" >Next</button>
+    </div>
+    
+    
+    <!-- Second step -->
+    
+    <div class ="form-step" id="secondStep">
+      
+      <div class="form__input-row">
+        <!-- Full Name  -->
+        <div class="form__input-wrapper form__input-wrapper--labelled">
+          <input id="advWsFormS2-fullName" type="text" class="form__field form__field--text step2-fields" maxlength="30" name="contact[fullName]" aria-label="Full Name" required>
+          <label for="advWsFormS2-fullName" class="form__floating-label">Full Name</label>
+        </div>
+        
+        <!-- Personal Email -->
+        <div class="form__input-wrapper form__input-wrapper--labelled">
+          <input id="advWsFormS2-email" type="email" class="form__field form__field--text step2-fields" maxlength="30" name="contact[personalEmail]" aria-label="Personal Email" required>
+          <label for="advWsFormS2-email" class="form__floating-label">Email</label>
+        </div>
+      </div>
+      
+      <div class="form__input-row">
+        <!-- Street Name -->
+        <div class="form__input-wrapper form__input-wrapper--labelled">
+          <input id="advWsFormS2-streetName" type="text" class="form__field form__field--text step2-fields" maxlength="30" name="contact[personalStreetName]" aria-label="Street Name" required>
+          <label for="advWsFormS2-streetName" class="form__floating-label">Street Name</label>
+        </div>
+
+        <!-- Street Number -->
+        <div class="form__input-wrapper form__input-wrapper--labelled">
+          <input id="advWsFormS2-streetNumber" type="text" class="form__field form__field--text step2-fields" maxlength="30" name="contact[personalStreetNumber]" aria-label="Street Number" required>
+          <label for="advWsFormS2-streetNumber" class="form__floating-label">Street Number</label>
+        </div>
+        
+      </div>
+      
+      <div class="form__input-row"> 
+        <!-- City -->
+        <div class="form__input-wrapper form__input-wrapper--labelled">
+          <input id="advWsFormS2-city" type="text" class="form__field form__field--text step2-fields" maxlength="30" name="contact[personalCity]" aria-label="City" required>
+          <label for="advWsFormS2-city" class="form__floating-label">City</label>
+        </div>
+        
+        <!-- Province -->
+        <div class="form__input-wrapper form__input-wrapper--labelled"> 
+          <input id="advWsFormS2-province" type="text" class="form__field form__field--text step2-fields" maxlength="30" name="contact[personalProvince]" aria-label="Province" required>
+          <label for="advWsFormS2-province" class="form__floating-label">Province</label>
+        </div>
+        
+        <!-- Postal Code -->
+        <div class="form__input-wrapper form__input-wrapper--labelled">
+          <input id="advWsFormS2-postalCode" type="text" class="form__field form__field--text step2-fields" maxlength="15" name="contact[personalPostalCode]" aria-label="Postal Code" required>
+          <label for="advWsFormS2-postalCode" class="form__floating-label">Postal Code</label>
+        </div>
+      </div>
+      
+      
+      <div class="form__input-row">
+        <!-- Number of Stores -->
+        <div class="form__input-wrapper">
+          <label for="advWsForm-numberOfStores">Number of Stores</label>
+          <input id="advWsForm-numberOfStores" type="number" class="form__field form__field--text step2-fields" name="contact[numberOfStores]" aria-label="Number of stores"  min="0" required>
+        </div>
+      </div>
+
+
+      <div class="adv-ws-btn-group">
+        <div class="form__input-row">
+          <button type="button" class="form__submit button button--primary button--min-width adv-ws-btn-previous">Previous</button>
+          <button type="button" class="form__submit button button--primary button--min-width ml-auto adv-ws-btn-next" id="adv-ws-step2-btn-next">Next</button>
+        </div>
+      </div>
+      
+    </div>
+
+    <!-- Third Step -->
+    
+    <div class ="form-step" id="thirdStep">
+      
+      <div class="form__input-row"> 
+      <!-- Payment Type -->
+        <div class="form__input-wrapper form__input-wrapper--labelled">
+          <div id="paymentType">
+            <label>Payment Type</label><br>
+            <input type="radio" id="isCredit" name="contact[paymentType]" class="step3-fields" value="Credit" required ><label for="isCredit"> Credit</label><br>
+            <input type="radio" id="isTransWire" name="contact[paymentType]" class="step3-fields" value="E-Transfer / Wire" required><label for="isTransWire"> E-Transfer / Wire</label><br>
+          
+          </div>
+          
+        </div>
+      </div>
+      
+      <!-- Container that holds the 2 check boxes when user selects credit option -->
+      <div id="creditOptionContainer" hidden="true">
+        
+        <div class="form__input-wrapper form__input-wrapper--labelled">
+            
+          <label>Agreement Options: Credit</label><br>
+            <input type="radio" id="creditOption1" name="contact[creditAgreementOption]" class="step3-fields" 
+                   value="I agree to wait for 2 weeks if any product is not in stock; after 2 weeks please cancel my back orders and send me a gift card which I can use for an upcoming order." 
+                   required ><label for="creditOption1"> I agree to wait for 2 weeks if any product is not in stock; after 2 weeks
+            please cancel my back orders and send me a gift card which I can use
+            for an upcoming order.</label><br>
+            <input type="radio" id="creditOption2" name="contact[creditAgreementOption]" class="step3-fields" value="I agree to wait for 2 weeks if any product is not in stock; after 2 weeks please cancel my back orders and send me a gift card which I can use for an upcoming order." required><label for="creditOption2"> I agree to wait until my order is fulfilled. Please keep my order
+          perpetually until I request cancellation.</label><br>
+        </div>
+      </div>
+      
+	
+      <div id="eTransWireOptionContainer" hidden="true">
+        
+        <div class="form__input-wrapper form__input-wrapper--labelled">
+            <label>Agreement Options: E-Transfer / Wire</label><br>
+            <input type="radio" id="eTransOption1" name="contact[e-TransferAgreementOption]" class="step3-fields" 
+                   value="I agree to pay the full amount upfront after getting tracking information (but no shipping). Please cancel my back orders and send me a revised invoice, and I will pay for what I am receiving." 
+                   required ><label for="eTransOption1"> I agree to pay the full amount upfront after getting tracking
+                  information (but no shipping). Please cancel my back orders and send
+                  me a revised invoice, and I will pay for what I am receiving.</label><br>
+            <input type="radio" id="eTransOption2" name="contact[e-TransferAgreementOption]" class="step3-fields" 
+                   value="I agree to pay the full amount up front and wait for any product which is not in stock until my order is fulfilled. Please keep my order perpetually until a cancellation request is submitted." 
+                   required><label for="eTransOption2"> I agree to pay the full amount up front and wait for any product
+            which is not in stock until my order is fulfilled. Please keep my order
+            perpetually until a cancellation request is submitted.</label><br>
+        </div>
+      </div>
+      
+      <div class="form__input-row">
+        <!-- Government ID Upload -->
+        <div class="form__input-wrapper">
+          <label for="advWsFormS2-govtIdUpload">Government ID Upload</label>
+          <input id="advWsFormS2-govtIdUpload" type="file" class="form__field form__field--text step3-fields"  aria-label="Govt ID Upload" required>
+        </div>
+
+        <!-- Business License Upload -->
+        <div class="form__input-wrapper">
+          <label for="advWsFormS2-bsnLicenseUpload">Business License Upload</label>
+          <input id="advWsFormS2-bsnLicenseUpload" type="file" class="form__field form__field--text step3-fields" aria-label="Business ID Upload" required>
+        </div>
+       </div>
+
+      <div class="adv-ws-btn-group">
+        <div class="form__input-row">
+          <button type="button" class="form__submit button button--primary button--min-width adv-ws-btn-previous">Previous</button>
+          <button type="button" class="form__submit button button--primary button--min-width ml-auto" id="submitBtn">Submit</button>
+        </div>
+      </div>
+      
+      <!-- File upload urls-->
+      <input type="hidden" value="" name="contact[governmentIdUploadUrl]" id="govtIdUploadUrlHidden">
+	  <input type="hidden" value="" name="contact[businessLicenseUploadUrl]" id="businessLicUploadUrlHidden">
+      
+    </div>
+
+    {%- endform -%}
+  
+  </div>
+    
+</div>
+
+{% schema %}
+{
+  "name": "Wholesale Signup Form",
+  "presets": [
+    {
+	  "category" : "ADVANCED LAYOUT",
+      "name": "Wholesale Signup Form"
+    }
+  ]
+}
+{% endschema %}
+
+
+<script>
+  
+  let currentPage = 0;
+  
+  const nextBtns = document.querySelectorAll('.adv-ws-btn-next');
+  const previousBtns = document.querySelectorAll('.adv-ws-btn-previous');
+  const submitBtn = document.getElementById('submitBtn');
+  const progress = document.getElementById('progress');
+  const formSteps  = document.querySelectorAll('.form-step');
+  const progressSteps = document.querySelectorAll('.progress-bar-step');
+  const step1Inputs = document.querySelectorAll('.step1-fields');
+  const step2Inputs = document.querySelectorAll('.step2-fields');
+  const step3Inputs = document.querySelectorAll('.step3-fields');
+  const contactForm = document.getElementById('adv-ws-form');
+  
+  const paymentType = document.getElementById('paymentType');
+  const creditOptionContainer = document.getElementById('creditOptionContainer');
+  const eTransWireOptionContainer = document.getElementById('eTransWireOptionContainer');
+  
+  const governmentId = document.getElementById('advWsFormS2-govtIdUpload');
+  const businessLicense = document.getElementById('advWsFormS2-bsnLicenseUpload');
+  
+  const errorMessage = document.getElementById('errorMessage');
+  const logger = document.getElementById('logger');
+  
+  const INVALID_FILE_TYPES_UPLOADED = "Invalid file types uploaded!";
+  const FILES_TOO_LARGE = "The uploaded files are too large - please try again!";
+  const ALREADY_UPLOADED = "Already uploaded these files - please try again!";
+  const GOVT_ID_INVALID_IMAGE_TYPE = "Government ID file type invalid: PNG, JPG or JPEG are the only supported image types!";
+  const BSNS_LIC_INVALID_IMAGE_TYPE = "Business license file type invalid: PNG, JPG or JPEG are the only supported image types!";
+  const UNKNOWN_ERROR = "Unknown error - contact administration!"
+  
+  const RemoteUrl = 'https://services.thedistro.ca/upload.php';
+  
+  function ShowErrorMessage(msg, duration)
+  {
+    errorMessage.innerHTML = msg;
+    errorMessage.hidden = false;
+    
+  	setTimeout(function()
+  	{
+    	errorMessage.hidden = true;
+	  }, duration);
+  }
+  
+  
+  function uuidv4() 
+  {
+    return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+    (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16));
+  }
+  
+  
+  function SubmitToRemote()
+  {
+   	window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    logger.innerHTML = "Uploading your files...";
+    logger.hidden = false;
+    
+  	const formData = new FormData();
+    
+    //console.log("Size of govt file: " + governmentId.files[0].size);
+    //console.log("Size of bsns lic file: " + businessLicense.files[0].size);
+    
+    const govtType = governmentId.files[0].type.split('/')[1];
+    const bsnsType = businessLicense.files[0].type.split('/')[1];
+        
+    const tempGovtFileName = uuidv4() + '.' + govtType;
+    const tempBsnsFileName = uuidv4() + '.' + bsnsType;
+    
+    formData.append('governmentID', governmentId.files[0], tempGovtFileName);
+    formData.append('businessLicense', businessLicense.files[0], tempBsnsFileName);
+    
+    const request = new Request(RemoteUrl,
+    {
+      method: 'POST',
+      body: formData
+    });
+    
+    
+    fetch(request)
+    .then(response => response.text())
+    .then(serverResponse => 
+    {       
+      switch(serverResponse)
+      {
+        case INVALID_FILE_TYPES_UPLOADED:
+          ShowErrorMessage(INVALID_FILE_TYPES_UPLOADED, 10000);
+          break;
+        case FILES_TOO_LARGE:
+          ShowErrorMessage(FILES_TOO_LARGE, 10000);
+          break;
+        case ALREADY_UPLOADED:
+          ShowErrorMessage(ALREADY_UPLOADED, 10000);
+          break;
+          case GOVT_ID_INVALID_IMAGE_TYPE:
+          ShowErrorMessage(GOVT_ID_INVALID_IMAGE_TYPE, 10000);
+          break;
+          case BSNS_LIC_INVALID_IMAGE_TYPE:
+          ShowErrorMessage(BSNS_LIC_INVALID_IMAGE_TYPE, 10000);
+          break;
+          case UNKNOWN_ERROR:
+          ShowErrorMessage(UNKNOWN_ERROR, 10000);
+          break;
+        default:
+          const splitItems = serverResponse.split('|');
+          const statusCode = splitItems[0];
+          const govtIdUploadUrl = splitItems[1];
+          const businessLicUploadUrl = splitItems[2];
+          
+          if(statusCode == 'SUCCESS')
+          {            
+            const govtIdUploadUrlHidden = document.getElementById('govtIdUploadUrlHidden');
+            const businessLicUploadUrlHidden = document.getElementById('businessLicUploadUrlHidden');
+			
+            govtIdUploadUrlHidden.value = govtIdUploadUrl;
+            businessLicUploadUrlHidden.value = businessLicUploadUrl;
+            
+            contactForm.submit();
+          }
+          else
+          {
+          	ShowErrorMessage(serverResponse, 10000);
+          }
+          break;
+      }
+      submitBtn.disabled = false;
+      logger.hidden = true;
+      
+    });
+  }
+  
+  submitBtn.addEventListener('click', () =>
+  {
+   	if(IsValid(step3Inputs))
+  	{
+      submitBtn.disabled = true;
+      SubmitToRemote();
+  	}
+                             
+  });
+
+  previousBtns.forEach(btn =>  
+  {
+    btn.addEventListener('click', () => 
+    {
+    	currentPage--; 
+        UpdateFormSteps();
+    	UpdateProgressBar();
+    });
+  });
+  
+  nextBtns.forEach(btn =>  
+  {
+     btn.addEventListener('click', () => 
+     {
+        switch(currentPage)
+        {
+          case 0:
+            if(IsValid(step1Inputs) === true)
+            {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+              MoveForward();
+            }
+          break;
+          case 1:
+            if(IsValid(step2Inputs) === true)
+            {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+              MoveForward();
+            }
+          break;
+        }
+    });
+  });
+  
+  
+  // Step 3 radio button logic
+  paymentType.onchange = function()
+  {
+    if(document.getElementById('isCredit').checked == true)
+    {
+      ToggleCredit();
+    }
+
+    if(document.getElementById('isTransWire').checked == true)
+    {
+      ToggleTrans();
+    }
+  };
+  
+  function ToggleCredit()
+  {
+    creditOptionContainer.hidden = false;
+    eTransWireOptionContainer.hidden = true;
+    
+    document.getElementById('eTransOption1').disabled = true;
+    document.getElementById('eTransOption2').disabled = true;
+ 
+    document.getElementById('creditOption1').disabled = false;
+    document.getElementById('creditOption2').disabled = false;
+  }
+  
+  function ToggleTrans()
+  {
+   	creditOptionContainer.hidden = true;
+    eTransWireOptionContainer.hidden = false;
+    
+    document.getElementById('eTransOption1').disabled = false;
+    document.getElementById('eTransOption2').disabled = false;
+
+    document.getElementById('creditOption1').disabled = true;
+    document.getElementById('creditOption2').disabled = true;
+  }
+  
+  function MoveForward()
+  {
+    currentPage++; 
+    UpdateFormSteps();
+    UpdateProgressBar();
+  }
+  
+  function IsValid(inputs)
+  {
+    for(let i = 0; i < inputs.length; i++)
+    {
+      if(inputs[i].checkValidity() === false)
+      {
+        inputs[i].reportValidity();
+        return false;
+      }
+      else
+      {
+        if(i == inputs.length - 1)
+        {
+        	return true;
+        }
+        else
+        {
+         	continue;
+        }
+      }
+    }
+  }
+  
+  function UpdateFormSteps()
+  {
+    formSteps.forEach((formStep) =>
+    {
+      formStep.classList.contains('form-step-active') && formStep.classList.remove('form-step-active');
+    });
+    
+  	formSteps[currentPage].classList.add('form-step-active');
+  }
+  
+  function UpdateProgressBar()
+  {
+    progressSteps.forEach((progressStep, i) => 
+    {
+      if(i < currentPage + 1)
+      {
+      	progressStep.classList.add('progress-bar-step-active');
+      }
+      else
+      {
+      	progressStep.classList.remove('progress-bar-step-active');
+      }
+    });
+    
+    const progressActive = document.querySelectorAll('.progress-bar-step-active');
+  	progress.style.width = ((progressActive.length - 1) / (progressSteps.length - 1)) * 100 + '%';
+  }
+  
+</script>
