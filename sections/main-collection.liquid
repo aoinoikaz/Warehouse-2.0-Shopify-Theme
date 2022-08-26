@@ -1,6 +1,5 @@
 {%- comment -%}We start by creating a lot of useful variables !{%- endcomment -%}
 
-
 {%- assign color_label = 'color,colour,couleur,cor,colore,farbe,색,色,カラー,färg,farve,szín,barva' | split: ',' -%}
 {%- assign items_per_page = cart.attributes.collection_products_per_page | default: section.settings.default_products_per_page -%}
 {%- assign quick_links_menu = section.settings.quick_links -%}
@@ -40,10 +39,6 @@
 {%- endcapture -%}
 
 <section data-section-id="{{ section.id }}" data-section-type="collection" data-section-settings='{{ section_settings }}'>
-
-
-   
-
   <div class="container container--flush">
     <div class="page__sub-header">
       <nav aria-label="{{ 'general.breadcrumb.title' | t }}" class="breadcrumb">
@@ -338,20 +333,14 @@
                             {%- endif -%}
                           </h1>
 
-                             
-
                           {%- assign offset = paginate.current_offset | plus: 1 -%}
                           {%- assign page_size = paginate.current_offset | plus: paginate.page_size | at_most: paginate.items -%}
 
                           <p class="collection__products-count text--small hidden-lap-and-up">{{ 'collection.general.products_count' | t: count: collection.all_products_count }}</p>
                           <p class="collection__products-count text--small hidden-pocket hidden-desk">{{ 'collection.general.showing_count' | t: offset: offset, page_size: page_size, count: paginate.items }}</p>
-                        
-                        
            
                         </div>
                       </div>
-
-
 
                       {%- if collection.description != blank -%}
                         {%- assign allow_collapse_description = false -%}
@@ -457,7 +446,7 @@
                     <span class="product-meta__sku" id="collection-outOfStockToggle">
                       <input id="collection-toggle-out-of-stock" type="checkbox">
                       <label for="collection-toggle-out-of-stock">
-                      Show out of stock
+                      Hide out of stock
                       </label>
                     </span>
                     

@@ -303,7 +303,7 @@
             <tr>
               {% for variant in product.variants %}
 
-                <th class="{% if variant.inventory_quantity < 1 %} collection-outOfStockVariant outOfStock-Hidden {% endif %}">
+                <th class="{% if variant.inventory_quantity < 1 %} collection-outOfStockVariant outOfStock-Shown {% endif %}">
                   <div class="product-form__selected-value text--strong variantTitle">{{- variant.title -}}</div>
                   <span class="product-meta__sku variantSku">{{ variant.sku }}</span>
                 </th>
@@ -311,7 +311,7 @@
             </tr>
             <tr>
               {% for variant in product.variants %}
-                <td class="{% if variant.inventory_quantity < 1 %} collection-outOfStockVariant outOfStock-Hidden {% endif %}">
+                <td class="{% if variant.inventory_quantity < 1 %} collection-outOfStockVariant outOfStock-Shown {% endif %}">
                   {%- if variant.inventory_quantity < 1 -%}
                     <span class="product-form__inventory inventory inventory--low inventoryLevel">{{ variant.inventory_quantity }}</span>
                   {%- else -%}
@@ -323,7 +323,7 @@
 
             <tr>
               {% for variant in product.variants %}
-                <td class=" {% if variant.inventory_quantity < 1 %}collection-outOfStockVariant outOfStock-Hidden {% endif %}">
+                <td class=" {% if variant.inventory_quantity < 1 %}collection-outOfStockVariant outOfStock-Shown {% endif %}">
                   <input type="number" id="{{ variant.id }}" class="form__field form__field--text collection-quantityInputSelector no-ignore-variant"   style="width: 70px;" min="0" {% if variant.inventory_quantity < 1 %}disabled{% endif %}>
                 </td>
               {% endfor %}

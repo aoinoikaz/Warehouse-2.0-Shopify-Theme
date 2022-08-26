@@ -14,7 +14,7 @@
           {% assign date = 'now' | date: '%B %d, %Y' %}
           {% assign offset = 15 | times: 24 | times: 60 | times: 60 %}
 
-          <div class="variantTooltip" id="variantTooltip" hidden="true"> ?
+          <div class="variantTooltip" id="variantTooltip"> ?
             <span class="tooltiptext">Est. Delivery: {{ date | date: "%s" | plus: offset | date: "%Y-%m-%d" }}</span>
           </div>
         </th>
@@ -24,7 +24,7 @@
       </tr>
 
       {% for variant in product.variants %}
-      <tr class="productVariantTableRow {% if variant.inventory_quantity < 1 %}outOfStockVariant outOfStock-Hidden{% endif %}">
+      <tr class="productVariantTableRow {% if variant.inventory_quantity < 1 %}outOfStockVariant outOfStock-Shown{% endif %}">
         <td>
           <div class="product-form__selected-value text--strong variantTitle">{{- variant.title -}}</div>
           <span class="product-meta__sku variantSku">SKU: {{ variant.sku }}</span><br>
@@ -120,11 +120,14 @@
     if(event.target.checked)
     {
       // Showing out of stock layout
-      variantToolTip.hidden = false;
+      variantToolTip.hidden = true;
+
+      //variantToolTip.classList.add('outOfStock-Hidden');
 
       for(let i = 0; i < oosBcs.length; i++)
       {
-        oosBcs[i].classList.remove('outOfStock-Hidden');
+        oosBcs[i].classList.remove('outOfStock-Shown');
+        oosBcs[i].classList.add('outOfStock-Hidden');
         oosBcs[i].querySelector('.quantityInputSelector').disabled = false;
       }
     }
@@ -132,12 +135,12 @@
     {
       // On Default layout (showing only the items in stock)
       // so we wana tag the out of stock ones as disabled
-      variantToolTip.hidden = true;
+      variantToolTip.hidden = false;
 
       for(let i = 0; i < oosBcs.length; i++)
       {
-        oosBcs[i].classList.remove('outOfStock-Shown');
-        oosBcs[i].classList.add('outOfStock-Hidden');
+        oosBcs[i].classList.remove('outOfStock-Hidden');
+        oosBcs[i].classList.add('outOfStock-Shown');
         
         // Disable it so it cannot be submitted
         oosBcs[i].querySelector('.quantityInputSelector').disabled = true;

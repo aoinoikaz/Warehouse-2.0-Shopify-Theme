@@ -18769,10 +18769,8 @@
 
 })));
 
-
 // Collection out of stock toggle and validation
 const collectionQuantityInputSelectors = document.getElementsByClassName('collection-quantityInputSelector');
-
 const collectionOosBcs = document.getElementsByClassName('collection-outOfStockVariant');
 const collectionOutOfStockToggle = document.getElementById('collection-outOfStockToggle');
 
@@ -18795,7 +18793,8 @@ if(collectionQuantityInputSelectors != null && collectionOosBcs != null && colle
     {
       for(let i = 0; i < collectionOosBcs.length; i++)
       {
-        collectionOosBcs[i].classList.remove('outOfStock-Hidden');
+        collectionOosBcs[i].classList.remove('outOfStock-Shown');
+        collectionOosBcs[i].classList.add('outOfStock-Hidden');
       }
 
       for(let i = 0; i < collectionQuantityInputSelectors.length; i++)
@@ -18810,8 +18809,8 @@ if(collectionQuantityInputSelectors != null && collectionOosBcs != null && colle
     {
       for(let i = 0; i < collectionOosBcs.length; i++)
       {
-        collectionOosBcs[i].classList.remove('outOfStock-Shown');
-        collectionOosBcs[i].classList.add('outOfStock-Hidden');
+        collectionOosBcs[i].classList.remove('outOfStock-Hidden');
+        collectionOosBcs[i].classList.add('outOfStock-Shown');
       }
     }
   });
