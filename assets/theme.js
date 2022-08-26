@@ -18796,14 +18796,6 @@ if(collectionQuantityInputSelectors != null && collectionOosBcs != null && colle
         collectionOosBcs[i].classList.remove('outOfStock-Shown');
         collectionOosBcs[i].classList.add('outOfStock-Hidden');
       }
-
-      for(let i = 0; i < collectionQuantityInputSelectors.length; i++)
-      {
-        if(collectionQuantityInputSelectors[i].classList.contains('no-ignore-variant'))
-        {
-          collectionQuantityInputSelectors[i].disabled = false;
-        }
-      }
     }
     else
     {
@@ -18811,6 +18803,14 @@ if(collectionQuantityInputSelectors != null && collectionOosBcs != null && colle
       {
         collectionOosBcs[i].classList.remove('outOfStock-Hidden');
         collectionOosBcs[i].classList.add('outOfStock-Shown');
+      }
+
+      for(let i = 0; i < collectionQuantityInputSelectors.length; i++)
+      {
+        if(collectionQuantityInputSelectors[i].classList.contains('no-ignore-variant'))
+        {
+          collectionQuantityInputSelectors[i].disabled = false;
+        }
       }
     }
   });
@@ -18822,8 +18822,6 @@ function CollectionAjaxAddToCart(sender)
 {
   const collectionBtnTop = document.getElementById('collectionAddToCartBtn-top');
   const collectionBtnBottom = document.getElementById('collectionAddToCartBtn-bottom');
-  
-  //const collectionQuantityInputs =  document.getElementsByClassName('collection-quantityInputSelector');
 
   const activeQuantityInputs = [];
   let totalQuantityAddedToCart = 0;
