@@ -13852,6 +13852,7 @@ shopify-payment-terms {
   visibility: visible;
 }
 
+
 #productVariantTable tr
 {
 	font-size: 14px;
@@ -14106,9 +14107,20 @@ input, select, textarea > #adv-ws-form
   Start Collection Styles 
 
 */
+
 .collection_variantsContainer
 {
   max-width: 641px;
+}
+
+#collectionTable tr
+{
+	font-size: 14px;
+}
+
+#collectionTable th
+{
+	font-size: 14px;
 }
 
 /* Decide whether or not we want to hide scroll bars */
