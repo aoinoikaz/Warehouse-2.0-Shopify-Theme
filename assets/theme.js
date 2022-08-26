@@ -18816,7 +18816,6 @@ if(collectionQuantityInputSelectors != null && collectionOosBcs != null && colle
   });
 }
 
-
 /* Custom ajax function to add to cart for collections page */
 function CollectionAjaxAddToCart(sender)
 {
