@@ -18769,27 +18769,24 @@
 
 })));
 
-// Collection out of stock toggle and validation
-const collectionQuantityInputSelectors = document.getElementsByClassName('collection-quantityInputSelector');
-const collectionOosBcs = document.getElementsByClassName('collection-outOfStockVariant');
-const collectionOutOfStockToggle = document.getElementById('collection-outOfStockToggle');
-
-if(collectionQuantityInputSelectors != null && collectionOosBcs != null && collectionOutOfStockToggle != null)
+function BindCollectionValidation(obj)
 {
-  for(let i = 0; i < collectionQuantityInputSelectors.length; i++)
+  if(isNaN(obj.value) || obj.value > 999 || obj.value < 1)
   {
-    collectionQuantityInputSelectors[i].addEventListener('keyup', function()
-    { 
-      if(isNaN(collectionQuantityInputSelectors[i].value) || collectionQuantityInputSelectors[i].value > 999 || collectionQuantityInputSelectors[i].value < 1)
-      {
-        collectionQuantityInputSelectors[i].value = '';
-      }
-    });
+    obj.value = '';
   }
+}
 
-  collectionOutOfStockToggle.addEventListener('change', event =>
+function ToggleOutOfStock()
+{
+  // Collection out of stock toggle and validation
+  const collectionQuantityInputSelectors = document.getElementsByClassName('collection-quantityInputSelector');
+  const collectionOosBcs = document.getElementsByClassName('collection-outOfStockVariant');
+  const toggle = document.getElementById('collection-toggle-out-of-stock');
+  
+  if(collectionQuantityInputSelectors != null && collectionOosBcs != null && toggle != null)
   {
-    if(event.target.checked)
+    if(toggle.checked)
     {
       for(let i = 0; i < collectionOosBcs.length; i++)
       {
@@ -18799,6 +18796,7 @@ if(collectionQuantityInputSelectors != null && collectionOosBcs != null && colle
     }
     else
     {
+
       for(let i = 0; i < collectionOosBcs.length; i++)
       {
         collectionOosBcs[i].classList.remove('outOfStock-Hidden');
@@ -18813,14 +18811,17 @@ if(collectionQuantityInputSelectors != null && collectionOosBcs != null && colle
         }
       }
     }
-  });
+  }
 }
+
 
 /* Custom ajax function to add to cart for collections page */
 function CollectionAjaxAddToCart(sender)
 {
   const collectionBtnTop = document.getElementById('collectionAddToCartBtn-top');
   const collectionBtnBottom = document.getElementById('collectionAddToCartBtn-bottom');
+
+  const cqis = document.getElementsByClassName('collection-quantityInputSelector');
 
   const activeQuantityInputs = [];
   let totalQuantityAddedToCart = 0;
@@ -18832,11 +18833,11 @@ function CollectionAjaxAddToCart(sender)
     ]
   };
 
-  for(let i = 0; i < collectionQuantityInputSelectors.length; i++)
+  for(let i = 0; i < cqis.length; i++)
   {
-    if(!collectionQuantityInputSelectors[i].disabled)
+    if(!cqis[i].disabled)
     {
-      activeQuantityInputs.push(collectionQuantityInputSelectors[i]);
+      activeQuantityInputs.push(cqis[i]);
     }
   }
 

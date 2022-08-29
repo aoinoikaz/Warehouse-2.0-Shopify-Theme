@@ -444,7 +444,7 @@
 
                     <!-- Custom element -->
                     <span class="product-meta__sku" id="collection-outOfStockToggle">
-                      <input id="collection-toggle-out-of-stock" type="checkbox">
+                      <input id="collection-toggle-out-of-stock" type="checkbox" onchange="ToggleOutOfStock();">
                       <label for="collection-toggle-out-of-stock">
                       Hide out of stock
                       </label>
@@ -737,26 +737,7 @@
       </div>
     </div>
   {%- endif -%}
-
-  {%- comment -%}
-  --------------------------------------------------------------------------------------
-  QUICK VIEW CONTAINER
-  --------------------------------------------------------------------------------------
-  {%- endcomment -%}
-
-  <div id="modal-quick-view-{{ section.id }}" class="modal" aria-hidden="true">
-    <div class="modal__dialog modal__dialog--stretch" role="dialog">
-      <button class="modal__close link" data-action="close-modal" title="{{ 'general.accessibility.close' | t | escape }}">
-        {%- render 'icon', icon: 'close' -%}
-      </button>
-
-      <div class="modal__loader">
-        {%- render 'icon', icon: 'search-loader' -%}
-      </div>
-
-      <div class="modal__inner"></div>
-    </div>
-  </div>
+  
 </section>
 
 {% comment %}{% javascript %}{%endcomment%}
