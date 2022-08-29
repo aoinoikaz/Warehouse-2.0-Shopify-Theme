@@ -61,7 +61,7 @@
             <div class="product-form__info-content">
               <div class="quantity-selector quantity-selector--product">
                 <button type="button" class="quantity-selector__button quantitySelectorMinus">{% render 'icon', icon: 'minus' %}</button>
-                <input id="{{ variant.id }}" class="quantity-selector__value quantityInputSelector"{% if variant.inventory_quantity < 1 %}disabled{% endif %} inputmode="numeric" value="0" size="3">
+                <input id="{{ variant.id }}" class="quantity-selector__value quantityInputSelector" inputmode="numeric" value="0" size="3">
                 <button type="button" class="quantity-selector__button quantitySelectorPlus">{% render 'icon', icon: 'plus' %}</button>
               </div>
             </div>

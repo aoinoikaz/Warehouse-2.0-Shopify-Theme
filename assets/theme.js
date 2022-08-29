@@ -18777,7 +18777,7 @@ function BindCollectionValidation(obj)
   }
 }
 
-function ToggleOutOfStock()
+function CollectionToggleOutOfStock()
 {
   // Collection out of stock toggle and validation
   const collectionQuantityInputSelectors = document.getElementsByClassName('collection-quantityInputSelector');
