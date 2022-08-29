@@ -1,10 +1,5 @@
 {
   "sections": {
-    "adv-form": {
-      "type": "advanced-wholesale-contact-form",
-      "settings": {
-      }
-    },
     "main": {
       "type": "main-page",
       "settings": {
@@ -21,7 +16,6 @@
     }
   },
   "order": [
-    "adv-form",
     "main",
     "newsletter"
   ]
