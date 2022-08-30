@@ -45,7 +45,7 @@
       <small class="form__spam-disclaimer">{{- 'shopify.online_store.spam_detection.disclaimer_html' | t -}}</small>
 
       <div class="form__secondary-action">
-        <p>{{ 'customer.login.new_customer' | t }} <a href="{{ routes.account_register_url }}" class="link link--accented">{{ 'customer.login.create_your_account' | t }}</a></p>
+        <p>{{ 'customer.login.new_customer' | t }} <a href="/pages/whole-sale" class="link link--accented">{{ 'customer.login.create_your_account' | t }}</a></p>
         <p>{{ 'customer.login.lost_password' | t }} <button type="button" data-action="toggle-login-form" class="link link--accented">{{ 'customer.login.recover_password' | t }}</button></p>
       </div>
     {%- endform -%}
@@ -65,7 +65,7 @@
     {%- form 'recover_customer_password', name: 'recover', class: 'form form--main', id: 'recover_customer_password', style: recover_default_visibility -%}
       <header class="form__header">
         <h1 class="form__title heading h1">{{ 'customer.recover_password.recover_password' | t }}</h1>
-        <p class="form__legend">{{ 'customer.recover_password.description' | t }}</p>
+        <p class="form__legend" {%- if form.posted_successfully? -%} hidden {%- endif -%}>{{ 'customer.recover_password.description' | t }}</p>
       </header>
 
       {%- if form.errors -%}
