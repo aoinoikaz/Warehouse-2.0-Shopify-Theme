@@ -18915,7 +18915,7 @@ function CollectionAjaxAddToCart(sender)
 function ClearEntireCart()
 {
   // we need the button that invokes the request
-  const clearCartBtn = document.getElementById('cart-clearCartBtn');
+  //const clearCartBtn = document.getElementById('cart-clearAllBtn');
 
   document.dispatchEvent(new CustomEvent('theme:loading:start'));
 
@@ -18933,18 +18933,18 @@ function ClearEntireCart()
   {
     document.dispatchEvent(new CustomEvent('theme:loading:end'));
 
-    console.log('response: ' + response.toString());
-    /*
     if (response.ok) 
     {
+      location.reload();
+      /*
       clearCartBtn.dispatchEvent(new CustomEvent('cart:refresh', 
       {
         bubbles: true,
-      }));
+      }));*/
     } 
     else 
     {
       alert('Error - please reload the page and try again! If the problem persists, please contact administration!');
-    }*/
+    }
   });
 }
