@@ -14188,3 +14188,19 @@ input, select, textarea > #adv-ws-form
     display: none;
   }
 }
+
+/* Clear all items from cart button inside the main cart */
+#cart-clearAllBtn
+{
+  display: block !important; 
+  margin-left: auto !important;
+  margin-bottom: 18px;
+}
+
+@media screen and (min-width: 641px)
+{
+  #cart-clearAllBtn
+  {
+    margin-bottom: 30px;
+  }
+}

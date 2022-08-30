@@ -18902,7 +18902,7 @@ function CollectionAjaxAddToCart(sender)
     }
     else 
     {
-      alert('Error - please reload the page to fix. If the problem persists, please contact administration!');
+      alert('Error - please reload the page and try again! If the problem persists, please contact administration!');
     }
   });
 
@@ -18910,4 +18910,41 @@ function CollectionAjaxAddToCart(sender)
   {
     activeQuantityInputs[i].value = '';
   }
+}
+
+function ClearEntireCart()
+{
+  // we need the button that invokes the request
+  const clearCartBtn = document.getElementById('cart-clearCartBtn');
+
+  document.dispatchEvent(new CustomEvent('theme:loading:start'));
+
+  fetch('/cart/clear.js', 
+  {
+    //body: JSON.stringify(multiFormData),
+    credentials: 'same-origin',
+    method: 'POST',
+    headers: 
+    {
+    'Content-Type': 'application/json',
+    'X-Requested-With': 'XMLHttpRequest' // This is needed as currently there is a bug in Shopify that assumes this header
+    }
+  }).then(function (response) 
+  {
+    document.dispatchEvent(new CustomEvent('theme:loading:end'));
+
+    console.log('response: ' + response.toString());
+    /*
+    if (response.ok) 
+    {
+      clearCartBtn.dispatchEvent(new CustomEvent('cart:refresh', 
+      {
+        bubbles: true,
+      }));
+    } 
+    else 
+    {
+      alert('Error - please reload the page and try again! If the problem persists, please contact administration!');
+    }*/
+  });
 }
