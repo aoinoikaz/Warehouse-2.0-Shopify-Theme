@@ -17,7 +17,7 @@ June 3, 2022
 
     {%- endif -%}
     
-    <p class="alert alert--error" id="errorMessage" hidden="true"></p>
+    <p class="alert alert--error" id="advFormErrorMessage" hidden="true"></p>
     <p class="alert" id="logger" hidden="true"></p>
 
 
@@ -354,7 +354,7 @@ June 3, 2022
   const governmentId = document.getElementById('advWsFormS2-govtIdUpload');
   const businessLicense = document.getElementById('advWsFormS2-bsnLicenseUpload');
   
-  const errorMessage = document.getElementById('errorMessage');
+  const advFormErrorMessage = document.getElementById('advFormErrorMessage');
   const logger = document.getElementById('logger');
   
   const INVALID_FILE_TYPES_UPLOADED = "Invalid file types uploaded!";
@@ -368,12 +368,12 @@ June 3, 2022
   
   function ShowErrorMessage(msg, duration)
   {
-    errorMessage.innerHTML = msg;
-    errorMessage.hidden = false;
+    advFormErrorMessage.innerHTML = msg;
+    advFormErrorMessage.hidden = false;
     
   	setTimeout(function()
   	{
-    	errorMessage.hidden = true;
+    	advFormErrorMessage.hidden = true;
 	  }, duration);
   }
   
