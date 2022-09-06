@@ -366,7 +366,7 @@ June 3, 2022
   
   const RemoteUrl = 'https://services.thedistro.ca/upload.php';
   
-  function ShowErrorMessage(msg, duration)
+  function ShowAdvFormErrorMessage(msg, duration)
   {
     advFormErrorMessage.innerHTML = msg;
     advFormErrorMessage.hidden = false;
@@ -420,22 +420,22 @@ June 3, 2022
       switch(serverResponse)
       {
         case INVALID_FILE_TYPES_UPLOADED:
-          ShowErrorMessage(INVALID_FILE_TYPES_UPLOADED, 10000);
+        ShowAdvFormErrorMessage(INVALID_FILE_TYPES_UPLOADED, 10000);
           break;
         case FILES_TOO_LARGE:
-          ShowErrorMessage(FILES_TOO_LARGE, 10000);
+        ShowAdvFormErrorMessage(FILES_TOO_LARGE, 10000);
           break;
         case ALREADY_UPLOADED:
-          ShowErrorMessage(ALREADY_UPLOADED, 10000);
+        ShowAdvFormErrorMessage(ALREADY_UPLOADED, 10000);
           break;
           case GOVT_ID_INVALID_IMAGE_TYPE:
-          ShowErrorMessage(GOVT_ID_INVALID_IMAGE_TYPE, 10000);
+          ShowAdvFormErrorMessage(GOVT_ID_INVALID_IMAGE_TYPE, 10000);
           break;
           case BSNS_LIC_INVALID_IMAGE_TYPE:
-          ShowErrorMessage(BSNS_LIC_INVALID_IMAGE_TYPE, 10000);
+          ShowAdvFormErrorMessage(BSNS_LIC_INVALID_IMAGE_TYPE, 10000);
           break;
           case UNKNOWN_ERROR:
-          ShowErrorMessage(UNKNOWN_ERROR, 10000);
+          ShowAdvFormErrorMessage(UNKNOWN_ERROR, 10000);
           break;
         default:
           const splitItems = serverResponse.split('|');
@@ -455,7 +455,7 @@ June 3, 2022
           }
           else
           {
-          	ShowErrorMessage(serverResponse, 10000);
+          	ShowAdvFormErrorMessage(serverResponse, 10000);
           }
           break;
       }
