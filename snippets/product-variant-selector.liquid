@@ -14,7 +14,7 @@
           {% assign date = 'now' | date: '%B %d, %Y' %}
           {% assign offset = 15 | times: 24 | times: 60 | times: 60 %}
 
-          <div class="variantTooltip" id="variantTooltip"> ?
+          <div class="product-variantTooltip" id="product-variantTooltip"> ?
             <span class="tooltiptext">Est. Delivery: {{ date | date: "%s" | plus: offset | date: "%Y-%m-%d" }}</span>
           </div>
         </th>
@@ -24,7 +24,7 @@
       </tr>
 
       {% for variant in product.variants %}
-      <tr class="productVariantTableRow {% if variant.inventory_quantity < 1 %}outOfStockVariant outOfStock-Shown{% endif %}">
+      <tr class="productVariantTableRow {% if variant.inventory_quantity < 1 %}product-outOfStockVariant outOfStock-Shown{% endif %}">
         <td>
           <div class="product-form__selected-value text--strong variantTitle">{{- variant.title -}}</div>
           <span class="product-meta__sku variantSku">SKU: {{ variant.sku }}</span><br>
@@ -56,7 +56,7 @@
           {%- endif -%}
         </td>
         <td>
-          <input type="number" id="{{ variant.id }}" class="form__field form__field--text product-quantityInputSelector no-ignore-variant" oninput="BindValidation(this);" style="width: 70px;">
+          <input type="number" id="{{ variant.id }}" class="form__field form__field--text product-quantityInputSelector" oninput="BindValidation(this);" style="width: 75px;">
 
           {% comment %}
           <!-- Quantity selector -->
@@ -78,46 +78,10 @@
 </div>
 
 <script>
-  const quantityInputSelectors = document.getElementsByClassName('quantityInputSelector');
-  const quantitySelectorsMinus = document.getElementsByClassName('quantitySelectorMinus');
-  const quantitySelectorsPlus = document.getElementsByClassName('quantitySelectorPlus');
-  const oosBcs = document.getElementsByClassName('outOfStockVariant');
-  const outOfStockToggle = document.getElementById('outOfStockToggle');
-  const variantToolTip = document.getElementById('variantTooltip');
-
-  for(let i = 0; i < quantityInputSelectors.length; i++)
-  {
-    quantityInputSelectors[i].addEventListener('keyup', function()
-    { 
-      // can be replaced with server sided validation for inventory
-      if(isNaN(quantityInputSelectors[i].value) || quantityInputSelectors[i].value > 999 || quantityInputSelectors[i].value < 1)
-      {
-        quantityInputSelectors[i].value = '';
-      }
-    });
-  }
-
-  for(let i = 0; i < quantitySelectorsMinus.length; i++)
-  {
-    quantitySelectorsMinus[i].addEventListener('click', function()
-    { 
-      if(quantityInputSelectors[i].value > 0)
-      {
-        quantityInputSelectors[i].value--;
-      }
-    });
-  }
-
-  for(let i = 0; i < quantitySelectorsMinus.length; i++)
-  {
-    quantitySelectorsPlus[i].addEventListener('click', function()
-    { 
-      if(quantityInputSelectors[i].value < 999)
-      {
-        quantityInputSelectors[i].value++;
-      }
-    });
-  }
+  const quantityInputSelectors = document.getElementsByClassName('product-quantityInputSelector');
+  const oosBcs = document.getElementsByClassName('product-outOfStockVariant');
+  const outOfStockToggle = document.getElementById('product-outOfStockToggle');
+  const variantToolTip = document.getElementById('product-variantTooltip');
 
   outOfStockToggle.addEventListener('change', event =>
   {
@@ -130,7 +94,7 @@
       {
         oosBcs[i].classList.remove('outOfStock-Shown');
         oosBcs[i].classList.add('outOfStock-Hidden');
-        oosBcs[i].querySelector('.quantityInputSelector').disabled = true;
+        oosBcs[i].querySelector('.product-quantityInputSelector').disabled = true;
       }
     }
     else
@@ -145,7 +109,7 @@
         oosBcs[i].classList.add('outOfStock-Shown');
         
         // Disable it so it cannot be submitted
-        oosBcs[i].querySelector('.quantityInputSelector').disabled = false;
+        oosBcs[i].querySelector('.product-quantityInputSelector').disabled = false;
       }
     }
   });

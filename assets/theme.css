@@ -13883,7 +13883,7 @@ shopify-payment-terms {
   padding: 0;
 }
 
-.variantTooltip 
+.product-variantTooltip 
 {
   position: relative;
   display: inline-block;
@@ -13891,7 +13891,7 @@ shopify-payment-terms {
 }
 
 /* Tooltip text */
-.variantTooltip .tooltiptext 
+.product-variantTooltip .tooltiptext 
 {
   visibility: hidden;
   width: 180px;
@@ -13910,7 +13910,7 @@ shopify-payment-terms {
 }
 
 /* Show the tooltip text when you mouse over the tooltip container */
-.variantTooltip:hover .tooltiptext 
+.product-variantTooltip:hover .tooltiptext 
 {
   visibility: visible;
 }
