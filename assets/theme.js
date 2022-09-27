@@ -18769,7 +18769,7 @@
 
 })));
 
-function BindCollectionValidation(obj)
+function BindValidation(obj)
 {
   if(isNaN(obj.value) || obj.value > 999 || obj.value < 1)
   {

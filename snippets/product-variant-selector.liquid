@@ -56,6 +56,9 @@
           {%- endif -%}
         </td>
         <td>
+          <input type="number" id="{{ variant.id }}" class="form__field form__field--text product-quantityInputSelector no-ignore-variant" oninput="BindValidation(this);" style="width: 70px;">
+
+          {% comment %}
           <!-- Quantity selector -->
           <div class="product-form__info-item">
             <div class="product-form__info-content">
@@ -66,6 +69,7 @@
               </div>
             </div>
           </div>
+        {% endcomment %}
         </td>
       </tr>
       {% endfor %}
