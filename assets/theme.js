@@ -18769,7 +18769,9 @@
 
 })));
 
-function BindValidation(obj)
+
+// This function is bound to all the inputs on the product and collections page
+function BindInputValidation(obj)
 {
   if(isNaN(obj.value) || obj.value > 999 || obj.value < 1)
   {
@@ -18777,6 +18779,7 @@ function BindValidation(obj)
   }
 }
 
+// This function is triggered when the collection page out of stock element is toggled.
 function CollectionToggleOutOfStock()
 {
   // Collection out of stock toggle and validation
@@ -18820,7 +18823,6 @@ function CollectionAjaxAddToCart(sender)
 {
   const collectionBtnTop = document.getElementById('collectionAddToCartBtn-top');
   const collectionBtnBottom = document.getElementById('collectionAddToCartBtn-bottom');
-
   const cqis = document.getElementsByClassName('collection-quantityInputSelector');
 
   const activeQuantityInputs = [];
@@ -18906,11 +18908,147 @@ function CollectionAjaxAddToCart(sender)
     }
   });
 
+  /*
   for(let i = 0; i < activeQuantityInputs.length; i++)
   {
     activeQuantityInputs[i].value = '';
-  }
+  }*/
 }
+
+function ProductToggleOutOfStock()
+{
+  const oosBcs = document.getElementsByClassName('product-outOfStockVariant');
+  const outOfStockToggle = document.getElementById('product-outOfStockToggle');
+  const variantToolTip = document.getElementById('product-variantTooltip');
+
+  outOfStockToggle.addEventListener('change', event =>
+  {
+    if(event.target.checked)
+    {
+      // Showing out of stock layout
+      variantToolTip.hidden = true;
+
+      for(let i = 0; i < oosBcs.length; i++)
+      {
+        oosBcs[i].classList.remove('outOfStock-Shown');
+        oosBcs[i].classList.add('outOfStock-Hidden');
+        oosBcs[i].querySelector('.product-quantityInputSelector').disabled = true;
+      }
+    }
+    else
+    {
+      // On Default layout (showing only the items in stock)
+      // so we wana tag the out of stock ones as disabled
+      variantToolTip.hidden = false;
+
+      for(let i = 0; i < oosBcs.length; i++)
+      {
+        oosBcs[i].classList.remove('outOfStock-Hidden');
+        oosBcs[i].classList.add('outOfStock-Shown');
+        
+        // Disable it so it cannot be submitted
+        oosBcs[i].querySelector('.product-quantityInputSelector').disabled = false;
+      }
+    }
+  });
+
+}
+
+function ProductAjaxAddToCart()
+{
+  const variantBtn = document.getElementById('variantAddToCartBtn-bottom');
+  const allQuantityInputs =  document.getElementsByClassName('product-quantityInputSelector');
+  const showOutOfStockItems = document.getElementById('toggle-out-of-stock').checked;
+  
+  const activeQuantityInputs = [];
+  let totalQuantityAddedToCart = 0;
+  
+  let multiFormData = 
+  {
+    items:
+    [
+    ]
+  };
+  
+  for(let i = 0; i < allQuantityInputs.length; i++)
+  {
+    if(!allQuantityInputs[i].disabled)
+    {
+      activeQuantityInputs.push(allQuantityInputs[i]);
+    }
+  }
+  
+  const activeQuantityLength = activeQuantityInputs.length;
+  
+  let foundItems = false;
+  
+  for(let i = 0; i < activeQuantityLength; i++)
+  {
+    if(activeQuantityInputs[i].value > 0)
+    {
+      let variantId = activeQuantityInputs[i].getAttribute('id');
+      let variantQuantity = activeQuantityInputs[i].value;
+      
+      multiFormData.items.push({id:variantId, quantity: variantQuantity});
+      
+      totalQuantityAddedToCart += parseInt(variantQuantity);
+      
+      foundItems = true;
+    }
+    else
+    {
+      if(i == activeQuantityLength - 1 && !foundItems)
+      {
+        alert('No products selected!');
+        return;
+      }
+    }
+  }
+  
+  document.dispatchEvent(new CustomEvent('theme:loading:start'));
+  
+  fetch('/cart/add.js', 
+  {
+    body: JSON.stringify(multiFormData),
+    credentials: 'same-origin',
+    method: 'POST',
+    headers: 
+    {
+      'Content-Type': 'application/json',
+      'X-Requested-With': 'XMLHttpRequest' // This is needed as currently there is a bug in Shopify that assumes this header
+    }
+  }).then(function (response) 
+    {
+    document.dispatchEvent(new CustomEvent('theme:loading:end'));
+
+      if (response.ok) 
+      {
+        variantBtn.dispatchEvent(new CustomEvent('product:added', 
+        {
+          bubbles: true,
+          detail:
+          {
+            quantity: totalQuantityAddedToCart
+          }
+        }));
+    } 
+    else if (response.status == 422)
+    {
+      alert('Cannot purchase this item when it is sold out!');
+    }
+    else 
+    {
+      alert('Error - please reload the page to fix. If the problem persists, please contact administration!');
+    }
+  });
+  
+  /*
+  for(let i = 0; i < activeQuantityInputs.length; i++)
+  {
+    activeQuantityInputs[i].value = '';
+  }*/
+}
+
 
 function ClearEntireCart()
 {

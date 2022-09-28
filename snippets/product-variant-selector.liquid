@@ -56,62 +56,10 @@
           {%- endif -%}
         </td>
         <td>
-          <input type="number" id="{{ variant.id }}" class="form__field form__field--text product-quantityInputSelector" oninput="BindValidation(this);" style="width: 75px;">
-
-          {% comment %}
-          <!-- Quantity selector -->
-          <div class="product-form__info-item">
-            <div class="product-form__info-content">
-              <div class="quantity-selector quantity-selector--product">
-                <button type="button" class="quantity-selector__button quantitySelectorMinus">{% render 'icon', icon: 'minus' %}</button>
-                <input id="{{ variant.id }}" class="quantity-selector__value quantityInputSelector" inputmode="numeric" value="0" size="3">
-                <button type="button" class="quantity-selector__button quantitySelectorPlus">{% render 'icon', icon: 'plus' %}</button>
-              </div>
-            </div>
-          </div>
-        {% endcomment %}
+          <input type="number" id="{{ variant.id }}" class="form__field form__field--text product-quantityInputSelector" oninput="BindInputValidation(this);" style="width: 75px;">
         </td>
       </tr>
       {% endfor %}
     </form>
   </table>
 </div>
-
-<script>
-  const quantityInputSelectors = document.getElementsByClassName('product-quantityInputSelector');
-  const oosBcs = document.getElementsByClassName('product-outOfStockVariant');
-  const outOfStockToggle = document.getElementById('product-outOfStockToggle');
-  const variantToolTip = document.getElementById('product-variantTooltip');
-
-  outOfStockToggle.addEventListener('change', event =>
-  {
-    if(event.target.checked)
-    {
-      // Showing out of stock layout
-      variantToolTip.hidden = true;
-
-      for(let i = 0; i < oosBcs.length; i++)
-      {
-        oosBcs[i].classList.remove('outOfStock-Shown');
-        oosBcs[i].classList.add('outOfStock-Hidden');
-        oosBcs[i].querySelector('.product-quantityInputSelector').disabled = true;
-      }
-    }
-    else
-    {
-      // On Default layout (showing only the items in stock)
-      // so we wana tag the out of stock ones as disabled
-      variantToolTip.hidden = false;
-
-      for(let i = 0; i < oosBcs.length; i++)
-      {
-        oosBcs[i].classList.remove('outOfStock-Hidden');
-        oosBcs[i].classList.add('outOfStock-Shown');
-        
-        // Disable it so it cannot be submitted
-        oosBcs[i].querySelector('.product-quantityInputSelector').disabled = false;
-      }
-    }
-  });
-  
-</script>

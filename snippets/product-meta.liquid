@@ -83,9 +83,9 @@
         {%- endunless -%}
       {%- endif -%}
       
-      <!-- Custom element -->
+      <!-- Toggle out of stock checkbox  -->
       <span class="product-meta__sku" id="product-outOfStockToggle">
-        <input id="toggle-out-of-stock" type="checkbox">
+        <input id="toggle-out-of-stock" type="checkbox" onchange="ProductToggleOutOfStock();">
         <label for="toggle-out-of-stock">
           Hide out of stock
         </label>

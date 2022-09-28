@@ -324,7 +324,7 @@
             <tr>
               {% for variant in product.variants %}
                 <td class="{% if variant.inventory_quantity < 1 %}collection-outOfStockVariant outOfStock-Shown {% endif %}">
-                  <input type="number" id="{{ variant.id }}" class="form__field form__field--text collection-quantityInputSelector no-ignore-variant" oninput="BindValidation(this);" style="width: 70px;">
+                  <input type="number" id="{{ variant.id }}" class="form__field form__field--text collection-quantityInputSelector no-ignore-variant" oninput="BindInputValidation(this);" style="width: 70px;">
                 </td>
               {% endfor %}
             </tr>
