@@ -3,7 +3,7 @@
     <div class="faq__group-list">
       {%- for block in section.blocks -%}
         {%- if forloop.first or block.type == 'separator' -%}
-          <div class="faq__group">
+          <div class="faq__group"></div>
         {%- endif -%}
 
         {%- case block.type -%}
