@@ -24,41 +24,45 @@
       </tr>
 
       {% for variant in product.variants %}
-      <tr class="productVariantTableRow {% if variant.inventory_quantity < 1 %}product-outOfStockVariant outOfStock-Shown{% endif %}">
-        <td>
-          <div class="product-form__selected-value text--strong variantTitle">{{- variant.title -}}</div>
-          <span class="product-meta__sku variantSku">SKU: {{ variant.sku }}</span><br>
-        </td>
-        <td>
-        <!-- Price -->
-          <div class="product-form__info-item" >
-            <div class="product-form__info-content" role="region" aria-live="polite">
-              {% if customer %}
-              <div class="price-list">
-                <span class="price">
-                  <span class="money orderFormPrices"> 
-                      {{variant.price | money_with_currency}}
+        <!-- We simply want to skip rendering this product if negative inventory and invalid policy -->
+        {% if variant.inventory_quantity < 1 and variant.inventory_policy == "deny" %}
+          {% continue %}
+        {% endif %}
+        <tr class="productVariantTableRow {% if variant.inventory_quantity < 1 %}product-outOfStockVariant outOfStock-Shown{% endif %}">
+          <td>
+            <div class="product-form__selected-value text--strong variantTitle">{{- variant.title -}}</div>
+            <span class="product-meta__sku variantSku">SKU: {{ variant.sku }}</span><br>
+          </td>
+          <td>
+          <!-- Price -->
+            <div class="product-form__info-item" >
+              <div class="product-form__info-content" role="region" aria-live="polite">
+                {% if customer %}
+                <div class="price-list">
+                  <span class="price">
+                    <span class="money orderFormPrices"> 
+                        {{variant.price | money_with_currency}}
+                    </span>
                   </span>
-                </span>
+                </div>
+                {% else %}
+                  {{ settings.hiddenPrices }}
+                {% endif %}
               </div>
-              {% else %}
-                {{ settings.hiddenPrices }}
-              {% endif %}
             </div>
-          </div>
-        </td>
-        <td>
-          <!-- Inventory levels with colouring -->
-          {%- if variant.inventory_quantity > 0-%}
-            <span class="product-form__inventory inventory inventory--high inventoryLevel">{{ variant.inventory_quantity }}</span>
-            {%- else -%}
-            <span class="product-form__inventory inventory inventory--low inventoryLevel">{{ variant.inventory_quantity }}</span>
-          {%- endif -%}
-        </td>
-        <td>
-          <input type="number" id="{{ variant.id }}" class="form__field form__field--text product-quantityInputSelector" oninput="BindInputValidation(this);" style="width: 75px;">
-        </td>
-      </tr>
+          </td>
+          <td>
+            <!-- Inventory levels with colouring -->
+            {%- if variant.inventory_quantity > 0-%}
+              <span class="product-form__inventory inventory inventory--high inventoryLevel">{{ variant.inventory_quantity }}</span>
+              {%- else -%}
+              <span class="product-form__inventory inventory inventory--low inventoryLevel">{{ variant.inventory_quantity }}</span>
+            {%- endif -%}
+          </td>
+          <td>
+            <input type="number" id="{{ variant.id }}" class="form__field form__field--text product-quantityInputSelector" oninput="BindInputValidation(this);" style="width: 75px;">
+          </td>
+        </tr>
       {% endfor %}
     </form>
   </table>
