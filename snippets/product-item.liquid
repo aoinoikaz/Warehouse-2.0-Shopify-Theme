@@ -300,9 +300,12 @@
     <div class="product-item__info collection_variantsContainer">
       <div class="table-wrapper">
         <table class="table" id="collectionTable">
+        
             <tr>
               {% for variant in product.variants %}
-
+                {% if variant.inventory_quantity < 1 and variant.inventory_policy == "deny" %}
+                  {% continue %}
+                {% endif %}
                 <th class="{% if variant.inventory_quantity < 1 %} collection-outOfStockVariant outOfStock-Shown {% endif %}">
                   <div class="product-form__selected-value text--strong variantTitle">{{- variant.title -}}</div>
                   <span class="product-meta__sku variantSku">{{ variant.sku }}</span>
@@ -311,6 +314,9 @@
             </tr>
             <tr>
               {% for variant in product.variants %}
+                {% if variant.inventory_quantity < 1 and variant.inventory_policy == "deny" %}
+                  {% continue %}
+                {% endif %}
                 <td class="{% if variant.inventory_quantity < 1 %} collection-outOfStockVariant outOfStock-Shown {% endif %}">
                   {%- if variant.inventory_quantity < 1 -%}
                     <span class="product-form__inventory inventory inventory--low inventoryLevel">{{ variant.inventory_quantity }}</span>
@@ -323,6 +329,9 @@
 
             <tr>
               {% for variant in product.variants %}
+                {% if variant.inventory_quantity < 1 and variant.inventory_policy == "deny" %}
+                  {% continue %}
+                {% endif %}
                 <td class="{% if variant.inventory_quantity < 1 %}collection-outOfStockVariant outOfStock-Shown {% endif %}">
                   <input type="number" id="{{ variant.id }}" class="form__field form__field--text collection-quantityInputSelector no-ignore-variant" oninput="BindInputValidation(this);" style="width: 70px;">
                 </td>

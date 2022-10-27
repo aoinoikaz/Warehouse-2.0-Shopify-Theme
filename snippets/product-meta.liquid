@@ -82,15 +82,13 @@
           <a class="product-meta__vendor link link--accented" href="{{ product.vendor | url_for_vendor }}">{{ product.vendor }}</a>
         {%- endunless -%}
       {%- endif -%}
-      
+
       <!-- Toggle out of stock checkbox  -->
       <span class="product-meta__sku" id="product-outOfStockToggle">
         <input id="toggle-out-of-stock" type="checkbox" onchange="ProductToggleOutOfStock();">
-        <label for="toggle-out-of-stock">
-          Hide out of stock
-        </label>
+        <label for="toggle-out-of-stock">Hide out of stock</label>
       </span>
-      
+
     </div>
   {%- endif -%}
 
