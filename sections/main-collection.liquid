@@ -451,14 +451,16 @@
                     </span>
                     
                     {% if customer %}
-                      <!-- Btn inside toolbar --> 
-                      <button type="button"
-                      id="collectionAddToCartBtn-top"
-                      class="product-form__add-button button button--primary"
-                      onclick="CollectionAjaxAddToCart('top'); return false;"
-                      >Add
-                      </button>
+                      {% if collection.products_count > 11 %}
+                        <!-- Btn inside toolbar --> 
+                        <button type="button"
+                        id="collectionAddToCartBtn-top"
+                        class="product-form__add-button button button--primary"
+                        onclick="CollectionAjaxAddToCart('top'); return false;">Add
+                        </button>
+                      {% endif %}
                     {% endif %}
+
                     
                   </div>
 
