@@ -54,13 +54,14 @@
             LINE ITEMS
             --------------------------------------------------------------------------------------
             {%- endcomment -%}
-
-            <button type="button"
-              id="cart-clearAllBtn"
-              class="product-form__add-button button button--primary"
-              onclick="ClearEntireCart(); return false;"
-              >Remove All
-            </button>
+            
+            {% if cart.items.size > 1 %}
+              <button type="button"
+                id="cart-clearAllBtn"
+                class="product-form__add-button button button--primary"
+                onclick="ClearEntireCart(); return false;">Remove All
+              </button>
+            {% endif %}
 
             <div class="card">
               <div class="table-wrapper">
