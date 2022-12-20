@@ -1,5 +1,17 @@
 {
   "sections": {
+    "ce9da56d-ceab-4902-9fc7-422ad92d639e": {
+      "type": "image-with-text",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/TripleBerry-BoxBottle-View_1000x1682_4376b1c6-5998-4172-99d2-c27eb82a9973.webp",
+        "image_position": "left",
+        "image_width": 20,
+        "title": "Excise Tax Available Now",
+        "content": "<p>All Boosted Bar Plus products shipped after December 20, 2022 will feature a Canadian Excise Stamp. <\/p>",
+        "button_text": "",
+        "button_link": ""
+      }
+    },
     "main": {
       "type": "main-collection",
       "settings": {
@@ -7,7 +19,7 @@
         "collapse_collection_description": true,
         "collection_image_size": "small",
         "products_per_row": "4",
-        "default_products_per_page": 36,
+        "default_products_per_page": 24,
         "default_view_layout": "list",
         "show_quick_buy": "list",
         "show_quick_view": "list",
@@ -28,6 +40,7 @@
     }
   },
   "order": [
+    "ce9da56d-ceab-4902-9fc7-422ad92d639e",
     "main",
     "recently-viewed-products"
   ]

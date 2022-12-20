@@ -1,202 +1,117 @@
 {
   "sections": {
-    "slideshow": {
-      "type": "slideshow",
+    "539e7404-6c7b-46ee-a175-1e7700160f47": {
+      "type": "image-with-text",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/Image_of_Workers.png",
+        "image_position": "left",
+        "image_width": 50,
+        "title": "We've made some changes.",
+        "content": "<p>We’ve listened to your feedback and we’re proud to announce a<br\/>brand-new, fully customer oriented website.<br\/><br\/>With more features coming soon, such as live invoice downloading, online warranty submissions and a quick reorder option, we're sure you're going to love the new Distro.<\/p>",
+        "button_text": "",
+        "button_link": ""
+      }
+    },
+    "afc16fcb-2600-47d1-b944-a8a58c16c26f": {
+      "type": "image-with-text",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/Untitled-48_c7f81e0c-2229-4681-96f8-5f1432b1785c.jpg",
+        "image_position": "right",
+        "image_width": 50,
+        "title": "Boosted Battery",
+        "content": "<p>The brand new Boosted Battery is arriving in January 2023 and features Boosted build quality, with the B1 chipset, ensuring maximum power output, regardless of the battery %.<\/p>",
+        "button_text": "Boosted Battery",
+        "button_link": "shopify:\/\/collections\/boosted-battery"
+      }
+    },
+    "a29c83f3-fb87-4ffc-bbec-a5e69ba4297c": {
+      "type": "offers",
       "blocks": {
-        "slide-1": {
-          "type": "image",
+        "template--14535739015265__a29c83f3-fb87-4ffc-bbec-a5e69ba4297c-1671049365fb0e3f47-0": {
+          "type": "offer",
           "settings": {
-            "show_overlay": false,
-            "overlay_opacity": 30,
-            "text_color": "#ffffff",
-            "title": "Slide title",
-            "content": "Tell your story",
-            "content_position": "middle_center",
-            "button_background": "#ffffff",
-            "button_text_color": "#000000",
-            "button_text": "Button",
-            "link": ""
+            "image": "shopify:\/\/shop_images\/Tax.png",
+            "title": "Excise Tax Products Now Available",
+            "content": "<p>We're proud to offer excise tax products starting December 21, 2022<\/p>"
           }
         },
-        "slide-2": {
-          "type": "image",
+        "template--14535739015265__a29c83f3-fb87-4ffc-bbec-a5e69ba4297c-1671049365fb0e3f47-1": {
+          "type": "offer",
           "settings": {
-            "show_overlay": false,
-            "overlay_opacity": 30,
-            "text_color": "#ffffff",
-            "title": "Slide title",
-            "content": "Tell your story",
-            "content_position": "middle_center",
-            "button_background": "#ffffff",
-            "button_text_color": "#000000",
-            "button_text": "Button",
+            "image": "shopify:\/\/shop_images\/Refund.png",
+            "title": "Excise Exchange Program",
+            "content": "<p>We're able to exchange any unsold products that you purchased between September 1, 2022 and December 20, 2022 for Excise Tax Product.<br\/><br\/>Please contact us for more details <a href=\"\/pages\/contact-us\" target=\"_blank\" title=\"Contact Us\">here<\/a><\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "template--14535739015265__a29c83f3-fb87-4ffc-bbec-a5e69ba4297c-1671049365fb0e3f47-0",
+        "template--14535739015265__a29c83f3-fb87-4ffc-bbec-a5e69ba4297c-1671049365fb0e3f47-1"
+      ],
+      "settings": {
+        "items_per_row": 2,
+        "stack_mobile": true
+      }
+    },
+    "8642f0c2-fa96-4001-9ab0-d1f8690a7bf5": {
+      "type": "quick-links",
+      "blocks": {
+        "template--14535739015265__8642f0c2-fa96-4001-9ab0-d1f8690a7bf5-1671049364b8106a09-0": {
+          "type": "link",
+          "settings": {
+            "title": "Boosted Pods",
+            "link": "shopify:\/\/collections\/boosted-pods"
+          }
+        },
+        "template--14535739015265__8642f0c2-fa96-4001-9ab0-d1f8690a7bf5-1671049364b8106a09-1": {
+          "type": "link",
+          "settings": {
+            "title": "Boosted Bar Plus",
+            "link": "shopify:\/\/collections\/boosted-bar-plus-1"
+          }
+        },
+        "template--14535739015265__8642f0c2-fa96-4001-9ab0-d1f8690a7bf5-1671049364b8106a09-2": {
+          "type": "link",
+          "settings": {
+            "title": "Boosted Bar Pro",
+            "link": "shopify:\/\/collections\/boosted-bar-plus"
+          }
+        },
+        "template--14535739015265__8642f0c2-fa96-4001-9ab0-d1f8690a7bf5-1671049364b8106a09-4": {
+          "type": "link",
+          "settings": {
+            "title": "Boosted Battery",
+            "link": "shopify:\/\/collections\/boosted-battery"
+          }
+        },
+        "template--14535739015265__8642f0c2-fa96-4001-9ab0-d1f8690a7bf5-1671049364b8106a09-3": {
+          "type": "link",
+          "settings": {
+            "title": "SVENSIN Pods",
             "link": ""
           }
         }
       },
       "block_order": [
-        "slide-1",
-        "slide-2"
+        "template--14535739015265__8642f0c2-fa96-4001-9ab0-d1f8690a7bf5-1671049364b8106a09-0",
+        "template--14535739015265__8642f0c2-fa96-4001-9ab0-d1f8690a7bf5-1671049364b8106a09-1",
+        "template--14535739015265__8642f0c2-fa96-4001-9ab0-d1f8690a7bf5-1671049364b8106a09-2",
+        "template--14535739015265__8642f0c2-fa96-4001-9ab0-d1f8690a7bf5-1671049364b8106a09-4",
+        "template--14535739015265__8642f0c2-fa96-4001-9ab0-d1f8690a7bf5-1671049364b8106a09-3"
       ],
       "settings": {
-        "edge_to_edge": false,
-        "section_size": "preserve_ratio",
-        "carousel_effect": "slide",
-        "autoplay": true,
-        "cycle_speed": 5
-      }
-    },
-    "featured-collection": {
-      "type": "featured-collection",
-      "settings": {
-        "collection": "",
-        "title": "Featured collection",
-        "products_count": 12,
-        "layout": "vertical",
-        "stack_products": false,
-        "show_quick_buy": false,
-        "link_title": "View all",
-        "link_url": ""
-      }
-    },
-    "collection-list": {
-      "type": "collection-list",
-      "blocks": {
-        "collection-1": {
-          "type": "collection",
-          "settings": {
-            "collection": "",
-            "link": ""
-          }
-        },
-        "collection-2": {
-          "type": "collection",
-          "settings": {
-            "collection": "",
-            "link": ""
-          }
-        },
-        "collection-3": {
-          "type": "collection",
-          "settings": {
-            "collection": "",
-            "link": ""
-          }
-        },
-        "collection-4": {
-          "type": "collection",
-          "settings": {
-            "collection": "",
-            "link": ""
-          }
-        },
-        "collection-5": {
-          "type": "collection",
-          "settings": {
-            "collection": "",
-            "link": ""
-          }
-        },
-        "collection-6": {
-          "type": "collection",
-          "settings": {
-            "collection": "",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "collection-1",
-        "collection-2",
-        "collection-3",
-        "collection-4",
-        "collection-5",
-        "collection-6"
-      ],
-      "settings": {
-        "title": "Our collections",
-        "link_title": "View all",
-        "link": "shopify:\/\/collections",
-        "round_images": true,
-        "show_collection_title": true
-      }
-    },
-    "newsletter": {
-      "type": "newsletter",
-      "settings": {
-        "title": "Newsletter",
-        "content": "<p>A short sentence describing what someone will receive by subscribing<\/p>",
-        "background": "#1e2d7d",
-        "text": "#ffffff"
-      }
-    },
-    "blog-posts": {
-      "type": "blog-posts",
-      "settings": {
-        "blog": "",
-        "blog_posts_count": 3,
-        "title": "Blog posts",
-        "link_title": "View all",
-        "show_category": true,
-        "show_author": true,
-        "show_date": true,
-        "show_excerpt": false,
-        "stack_mobile": false
-      }
-    },
-    "text-with-icons": {
-      "type": "text-with-icons",
-      "blocks": {
-        "icon-1": {
-          "type": "item",
-          "settings": {
-            "icon": "bi-delivery",
-            "title": "Free delivery worldwide",
-            "content": "<p>Short content about your store<\/p>"
-          }
-        },
-        "icon-2": {
-          "type": "item",
-          "settings": {
-            "icon": "bi-returns",
-            "title": "Satisfied or refunded",
-            "content": "<p>Short content about your store<\/p>"
-          }
-        },
-        "icon-3": {
-          "type": "item",
-          "settings": {
-            "icon": "bi-customer-support",
-            "title": "Top-notch support",
-            "content": "<p>Short content about your store<\/p>"
-          }
-        },
-        "icon-4": {
-          "type": "item",
-          "settings": {
-            "icon": "bi-secure-payment",
-            "title": "Secure payments",
-            "content": "<p>Short content about your store<\/p>"
-          }
-        }
-      },
-      "block_order": [
-        "icon-1",
-        "icon-2",
-        "icon-3",
-        "icon-4"
-      ],
-      "settings": {
-        "stack_mobile": false
+        "title": "Quick links",
+        "expand_items": true,
+        "show_desktop": true,
+        "link_title": "",
+        "link": ""
       }
     }
   },
   "order": [
-    "slideshow",
-    "featured-collection",
-    "collection-list",
-    "newsletter",
-    "blog-posts",
-    "text-with-icons"
+    "539e7404-6c7b-46ee-a175-1e7700160f47",
+    "afc16fcb-2600-47d1-b944-a8a58c16c26f",
+    "a29c83f3-fb87-4ffc-bbec-a5e69ba4297c",
+    "8642f0c2-fa96-4001-9ab0-d1f8690a7bf5"
   ]
 }

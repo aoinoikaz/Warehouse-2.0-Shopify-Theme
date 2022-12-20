@@ -8,6 +8,10 @@
     "contact-form": {
       "type": "contact-form",
       "settings": {
+        "form_heading": "Any questions, concerns or comments. Let us know.",
+        "show_store_info": true,
+        "store_heading": "Our team is small, but dedicated.",
+        "store_info": "<p>Our team might be small, but there's power in dedication. <br\/><br\/>Our focus is on your success. Let us know how we can help and we'll reach out to you with an answer within 48 hours, but its typically sooner. <br\/><br\/>As soon as we see the email, we'll reply.<\/p>"
       }
     }
   },
