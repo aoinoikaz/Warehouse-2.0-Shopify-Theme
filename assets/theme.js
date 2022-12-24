@@ -18771,11 +18771,16 @@
 
 
 // This function is bound to all the inputs on the product and collections page
-function BindInputValidation(obj)
+function BindInputValidation(obj, maxInventory)
 {
-  if(isNaN(obj.value) || obj.value > 999 || obj.value < 1)
+  if(isNaN(obj.value) || obj.value < 1)
   {
     obj.value = '';
+  }
+
+  if(obj.value > maxInventory)
+  {
+    obj.value = maxInventory;
   }
 }
 

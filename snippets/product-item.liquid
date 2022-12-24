@@ -333,7 +333,9 @@
                   {% continue %}
                 {% endif %}
                 <td class="{% if variant.inventory_quantity < 1 %}collection-outOfStockVariant outOfStock-Shown {% endif %}">
-                  <input type="number" id="{{ variant.id }}" class="form__field form__field--text collection-quantityInputSelector no-ignore-variant" oninput="BindInputValidation(this);" style="width: 70px;">
+                  <input type="number" id="{{ variant.id }}" max="{{ variant.inventory_quantity }}" 
+                    class="form__field form__field--text collection-quantityInputSelector no-ignore-variant" 
+                    oninput="BindInputValidation(this, {{ variant.inventory_quantity }});" style="width: 70px;">
                 </td>
               {% endfor %}
             </tr>
