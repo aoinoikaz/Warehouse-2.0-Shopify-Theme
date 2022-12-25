@@ -18771,7 +18771,7 @@
 
 
 // This function is bound to all the inputs on the product and collections page
-function BindInputValidation(obj, maxInventory)
+function Validate(obj, maxInventory)
 {
   if(isNaN(obj.value) || obj.value < 1)
   {
@@ -18913,11 +18913,10 @@ function CollectionAjaxAddToCart(sender)
     }
   });
 
-  /*
   for(let i = 0; i < activeQuantityInputs.length; i++)
   {
     activeQuantityInputs[i].value = '';
-  }*/
+  }
 }
 
 function ProductToggleOutOfStock()
@@ -19047,11 +19046,11 @@ function ProductAjaxAddToCart()
     }
   });
   
-  /*
+  
   for(let i = 0; i < activeQuantityInputs.length; i++)
   {
     activeQuantityInputs[i].value = '';
-  }*/
+  }
 }
 
 

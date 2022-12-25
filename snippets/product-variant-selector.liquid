@@ -53,14 +53,15 @@
           </td>
           <td>
             <!-- Inventory levels with colouring -->
-            {%- if variant.inventory_quantity > 0-%}
+            {%- if variant.inventory_quantity > 0 -%}
               <span class="product-form__inventory inventory inventory--high inventoryLevel">{{ variant.inventory_quantity }}</span>
               {%- else -%}
               <span class="product-form__inventory inventory inventory--low inventoryLevel">{{ variant.inventory_quantity }}</span>
             {%- endif -%}
           </td>
           <td>
-            <input type="number" id="{{ variant.id }}" class="form__field form__field--text product-quantityInputSelector" oninput="BindInputValidation(this);" style="width: 75px;">
+            <input type="number" id="{{ variant.id }}" class="form__field form__field--text product-quantityInputSelector" 
+              max="{{ variant.inventory_quantity }}" oninput="Validate(this, {{ variant.inventory_quantity }});" style="width: 75px;">
           </td>
         </tr>
       {% endfor %}
