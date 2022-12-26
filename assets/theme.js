@@ -18771,17 +18771,36 @@
 
 
 // This function is bound to all the inputs on the product and collections page
-function Validate(obj, maxInventory)
+function Validate(obj, inventoryLevel, inventoryPolicy)
 {
   if(isNaN(obj.value) || obj.value < 1)
   {
     obj.value = '';
   }
 
-  if(obj.value > maxInventory)
+  if(obj.value > inventoryLevel && inventoryLevel > 0)
   {
-    obj.value = maxInventory;
+    obj.value = inventoryLevel;
   }
+
+  // handle the casse of negative inventory and continued selling policy
+  if(inventoryLevel < 1 && inventoryPolicy == 'continue')
+  {
+    if(obj.value > 999)
+    {
+      obj.value = 999;
+    }
+  }
+}
+
+// 
+function CanShowToggle()
+{
+  // call upon page load
+  // for each variant
+  // if a variant is out of stock return true
+  // otherwise return false as there are 
+  // no out of stock items, thus no need to display the toggle
 }
 
 // This function is triggered when the collection page out of stock element is toggled.
@@ -18955,7 +18974,6 @@ function ProductToggleOutOfStock()
       }
     }
   });
-
 }
 
 function ProductAjaxAddToCart()

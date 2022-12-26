@@ -61,7 +61,8 @@
           </td>
           <td>
             <input type="number" id="{{ variant.id }}" class="form__field form__field--text product-quantityInputSelector" 
-              max="{{ variant.inventory_quantity }}" oninput="Validate(this, {{ variant.inventory_quantity }});" style="width: 75px;">
+              max="{% if variant.inventory_policy == 'deny' %} {{ variant.inventory_quantity }} {% else %}999{% endif %}" 
+              oninput="Validate(this, {{ variant.inventory_quantity }}, '{{ variant.inventory_policy }}');" style="width: 75px;">
           </td>
         </tr>
       {% endfor %}
